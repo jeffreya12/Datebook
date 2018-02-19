@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Datebook</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_on">Sign on</string>
+    <string name="error_invalid_sign_on">Can\'t sign on</string>
+    <string name="alert_valid_sign_on">Successful sign on</string>
+    <string name="alert_valid_sign_on_body">You are now registered</string>
+    <string name="error_invalid_username">This username is already in use</string>
+    <string name="error_invalid_sign_in">Can\'t sign in</string>
+    <string name="error_sign_in">The password is incorrect</string>
+    <string name="error_username">The user does not exist</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_main">MainActivity</string>
+</resources>
