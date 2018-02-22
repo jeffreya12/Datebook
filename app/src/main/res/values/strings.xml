@@ -14,8 +14,21 @@
     <string name="error_sign_in">The password is incorrect</string>
     <string name="error_username">The user does not exist</string>
     <string name="error_field_required">This field is required</string>
+    <string name="prompt_erase">Erase event</string>
+    <string name="prompt_close_dialog">Close</string>
+    <string name="event_dialog_title">Event details</string>
+    <string name="event_dialog_name">Name</string>
+    <string name="event_dialog_place">Place</string>
+    <string name="event_dialog_date">Date</string>
+    <string name="colon_space">: </string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="createevent_title">Create event</string>
+    <string name="prompt_name">Name</string>
+    <string name="prompt_place">Place</string>
+    <string name="prompt_date">Date</string>
+    <string name="prompt_submit">Submit</string>
+    <string name="event_info">Event details</string>
 </resources>

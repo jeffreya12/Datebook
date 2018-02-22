@@ -10,31 +10,38 @@ public class Event {
 
     private int id;
     private Date date;
-    private User user;
+    private int userId;
     private String place;
     private String name;
 
-    public Event(Date date, User user, String place, String name, int id) {
+    public Event(int id, Date date, int userId, String place, String name) {
+        this.id = id;
         this.date = date;
-        this.user = user;
+        this.userId = userId;
         this.place = place;
         this.name = name;
-        this.id = id;
     }
 
-    public Event(Date date, User user, String place, String name) {
+    public Event(Date date, int userId, String place, String name) {
         this.date = date;
-        this.user = user;
+        this.userId = userId;
         this.place = place;
         this.name = name;
+    }
+
+    public Event() {
+    }
+
+    public int getId() {
+        return id;
     }
 
     public Date getDate() {
         return date;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
     public String getPlace() {
@@ -45,16 +52,16 @@ public class Event {
         return name;
     }
 
-    public int getId() {
-        return id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setDate(Date date) {
         this.date = date;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public void setPlace(String place) {
@@ -65,18 +72,8 @@ public class Event {
         this.name = name;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
-        return "Event{" +
-                "id=" + id +
-                ", date=" + date +
-                ", user=" + user +
-                ", place='" + place + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+        return name + "\n" + place + "\n" + date.toString();
     }
 }

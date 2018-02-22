@@ -2,6 +2,7 @@ package cr.ac.itcr.datebook.activities;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 
@@ -87,8 +88,21 @@ public class LoginActivity extends AppCompatActivity {
 
                     // COnfirma que la contrasena sea igual a la registrada
                     if(password.equals(retrievedUser.getPassword())){
+
+                        // Gurda la sesion en SharedPreferences
+                        SharedPreferences sessionPreferences = getApplicationContext().getSharedPreferences("SessionPreferences", 0); // 0 - for private mode
+                        SharedPreferences.Editor editor = sessionPreferences.edit();
+
+                        editor.putString("username", retrievedUser.getUsername());
+                        editor.putString("password", retrievedUser.getPassword());
+                        editor.putInt("id", retrievedUser.getId());
+
+                        editor.commit();
+
+                        //Abre la siguiente ventana
                         Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(myIntent);
+                        finish();
                     }
 
                     //Si las contrasenas no concuerdan, muestra una alerta con el error
