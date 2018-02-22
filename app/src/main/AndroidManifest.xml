@@ -25,7 +25,6 @@
         </activity>
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.CreateEventActivity" />
-        <activity android:name=".activities.EventActivity"></activity>
     </application>
 
 </manifest>

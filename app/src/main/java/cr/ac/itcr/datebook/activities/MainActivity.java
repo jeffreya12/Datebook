@@ -58,13 +58,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                /*
-                Intent intent = new Intent(MainActivity.this, EventActivity.class);
-                String eventId = String.valueOf(eventList.get(i).getId());
-                intent.putExtra("eventId", eventId);
-                startActivity(intent);
-                */
-
                 final Event event = eventList.get(i);
 
                 builder.setMessage(
