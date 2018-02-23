@@ -11,65 +11,77 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
         <TextView
             android:id="@+id/createevent_txvTitle"
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            android:layout_margin="@dimen/activity_horizontal_margin"
             android:text="@string/createevent_title"
             android:textAlignment="center"
+            android:textAllCaps="true"
             android:textAppearance="@android:style/TextAppearance.Material.Headline"
+            android:textStyle="bold"
             tools:layout_editor_absoluteX="81dp"
             tools:layout_editor_absoluteY="0dp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/createevent_etxName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_vertical_margin"
             android:ems="10"
             android:hint="@string/prompt_name"
             android:inputType="textPersonName" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/createevent_etxPlace"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_vertical_margin"
             android:contentDescription="Place"
             android:ems="10"
             android:hint="@string/prompt_place"
             android:inputType="textPersonName" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/createevent_edtDate"
+        <TextView
+            android:id="@+id/createevent_txvDatePicker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/prompt_date"
-            android:inputType="date" />
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="@string/prompt_date"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
-        <Space
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="106dp"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/createevent_spnDay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/createevent_spnMonth"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/createevent_spnYear"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/createevent_btnSubmit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_vertical_margin"
             android:text="@string/prompt_submit" />
 
     </LinearLayout>

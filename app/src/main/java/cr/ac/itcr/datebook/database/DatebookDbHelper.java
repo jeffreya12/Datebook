@@ -25,14 +25,18 @@ import cr.ac.itcr.datebook.domain.User;
 
 public class DatebookDbHelper extends SQLiteOpenHelper {
 
+    // Informacion de la base de datos
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Datebook.db";
 
+    // Crea tabla se usuarios
     private static final String SQL_CREATE_USERS =
             "CREATE TABLE " + DatebookContract.UserEntry.TABLE_NAME
                     + " (id INTEGER PRIMARY KEY, "+ DatebookContract.UserEntry.COLUMN_NAME_USERNAME
                     +" TEXT UNIQUE NOT NULL, " + DatebookContract.UserEntry.COLUMN_NAME_PASSWORD
                     + " TEXT NOT NULL)";
+
+    // Crea tabla de eventos
     private static final String SQL_CREATE_EVENTS =
             "CREATE TABLE " + DatebookContract.EventEntry.TABLE_NAME
                     + " (id INTEGER PRIMARY KEY, " + DatebookContract.EventEntry.COLUMN_NAME_NAME
@@ -41,16 +45,21 @@ public class DatebookDbHelper extends SQLiteOpenHelper {
                     + " TEXT NOT NULL, " + DatebookContract.EventEntry.COLUMN_NAME_USERID
                     + " INTEGER NOT NULL)";
 
+    // Drop de la tabla de usuarios
     private static final String SQL_DELETE_USERS =
             "DROP TABLE IF EXISTS " + DatebookContract.UserEntry.TABLE_NAME;
 
+    // Drop de la tabla de eventos
     private static final String SQL_DELETE_EVENTS =
             "DROP TABLE IF EXISTS " + DatebookContract.EventEntry.TABLE_NAME;
 
+    // Constructor
     public DatebookDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    // Ejecuta los querys de creacion de tablas
+    // este metodo solo se ejecuta la primera vez que se abre la aplicacion
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
@@ -59,6 +68,8 @@ public class DatebookDbHelper extends SQLiteOpenHelper {
 
     }
 
+    // Si la aplicacion detecta un cambio en la estructura base, borra las tablas y las
+    // crea de nuevo
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
@@ -68,15 +79,18 @@ public class DatebookDbHelper extends SQLiteOpenHelper {
 
     }
 
+    // Metodo para insertar usuario en la base
     public long insertUser(User user){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DatebookContract.UserEntry.COLUMN_NAME_USERNAME, user.getUsername());
         values.put(DatebookContract.UserEntry.COLUMN_NAME_PASSWORD, user.getPassword());
 
+        // Retorna el id insertado
         return db.insert(DatebookContract.UserEntry.TABLE_NAME, null, values);
     }
 
+    // Metodo para insertar usuario en la base
     public long insertEvent(Event event){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -85,11 +99,15 @@ public class DatebookDbHelper extends SQLiteOpenHelper {
         values.put(DatebookContract.EventEntry.COLUMN_NAME_DATE, event.getDate().toString());
         values.put(DatebookContract.EventEntry.COLUMN_NAME_USERID, event.getUserId());
 
+        // Retorna el id insertado
         return db.insert(DatebookContract.EventEntry.TABLE_NAME, null, values);
     }
 
+    // COnsulta usuario
     public User getUser(String username){
         SQLiteDatabase db = this.getWritableDatabase();
+
+        // Objeto encargado de recorrer los resultados de las consultas
         Cursor cursor = db.query(DatebookContract.UserEntry.TABLE_NAME, new String[]{"id",
                 DatebookContract.UserEntry.COLUMN_NAME_USERNAME,
                 DatebookContract.UserEntry.COLUMN_NAME_PASSWORD},
@@ -98,11 +116,15 @@ public class DatebookDbHelper extends SQLiteOpenHelper {
         if(cursor != null){
             cursor.moveToFirst();
         }
+
         User newUser = new User(cursor.getString(1), cursor.getString(2),
                 Integer.parseInt(cursor.getString(0)));
+
+        // Retorna el usuario consultado
         return newUser;
     }
 
+    // Metodo para consultar el listado de eventos por usuario
     public List<Event> getAllEvents(int userId){
         List<Event> eventList = new ArrayList<>();
 
@@ -113,10 +135,13 @@ public class DatebookDbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
+        // Se formatea el valor Date para poder manipularlo en Java
         DateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
         Date date = null;
         if(cursor.moveToFirst()){
             do {
+                // Siempre que hayan entradas en la consulta,
+                // recorra cada una y cree un objeto Evento
                 Event event = new Event();
                 event.setId(Integer.parseInt(cursor.getString(0)));
                 event.setName(cursor.getString(1));
@@ -132,12 +157,15 @@ public class DatebookDbHelper extends SQLiteOpenHelper {
                 event.setUserId(Integer.parseInt(cursor.getString(4)));
 
                 eventList.add(event);
-            } while (cursor.moveToNext());
+            } while (cursor.moveToNext()); // Siempre que hayan entradas
+                                            // en el resultado de la consulta
         }
 
+        // Retorna una lista con los eventos consultados
         return eventList;
     }
 
+    // Borra un evento de la base de datos
     public void deleteEvent(Event event){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(DatebookContract.EventEntry.TABLE_NAME, "id = ?", new String[]{

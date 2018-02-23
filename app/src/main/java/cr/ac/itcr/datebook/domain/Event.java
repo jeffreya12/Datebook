@@ -1,5 +1,6 @@
 package cr.ac.itcr.datebook.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -74,6 +75,7 @@ public class Event {
 
     @Override
     public String toString() {
-        return name + "\n" + place + "\n" + date.toString();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        return name + "\n" + place.toString() + "\n" + date.toString();
     }
 }

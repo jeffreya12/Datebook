@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
+            android:baselineAlignBottom="true"
             android:clickable="true"
             android:tint="@android:color/white"
             app:layout_anchor="@id/main_lnlView"
@@ -31,10 +32,21 @@
                 android:id="@+id/main_txvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_vertical_margin"
                 android:text="@string/main_title"
                 android:textAlignment="center"
-                android:textAppearance="@android:style/TextAppearance.Material.Title"
+                android:textAllCaps="true"
+                android:textAppearance="@android:style/TextAppearance.Material.Headline"
                 android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/main_etxSearch"
+                android:layout_width="match_parent"
+                android:layout_height="76dp"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:ems="10"
+                android:hint="@string/prompt_search"
+                android:inputType="textPersonName" />
 
             <LinearLayout
                 android:id="@+id/main_lnlView"
@@ -45,7 +57,8 @@
                 <ListView
                     android:id="@+id/main_ltvEvents"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/activity_vertical_margin">
 
                 </ListView>
             </LinearLayout>

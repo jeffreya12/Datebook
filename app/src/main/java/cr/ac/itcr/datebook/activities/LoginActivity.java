@@ -17,7 +17,7 @@ import cr.ac.itcr.datebook.database.DatebookDbHelper;
 import cr.ac.itcr.datebook.domain.User;
 
 /**
- * A login screen that offers login via email/password.
+ * Ingreso a la actividad
  */
 public class LoginActivity extends AppCompatActivity {
 
@@ -35,14 +35,14 @@ public class LoginActivity extends AppCompatActivity {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         // Boton de login
-        Button btnSignOn = (Button)findViewById(R.id.login_btnSignOn);
+        Button btnSignOn = (Button) findViewById(R.id.login_btnSignOn);
         btnSignOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //instancia de la caja de texto
-                EditText etxUsername = (EditText)findViewById(R.id.login_etxUsername);
-                EditText etxPassword = (EditText)findViewById(R.id.login_etxPassword);
+                EditText etxUsername = (EditText) findViewById(R.id.login_etxUsername);
+                EditText etxPassword = (EditText) findViewById(R.id.login_etxPassword);
                 String username = etxUsername.getText().toString();
                 String password = etxPassword.getText().toString();
 
@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                 long id = db.insertUser(user);
 
                 // En caso de que exista el usuario, se muestra un dialogo con el error
-                if(id == -1){
+                if (id == -1) {
                     builder.setMessage(R.string.error_invalid_username)
                             .setTitle(R.string.error_invalid_sign_on);
                     AlertDialog dialog = builder.create();
@@ -72,22 +72,23 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //Boton de registro
-        Button btnSignIn = (Button)findViewById(R.id.login_btnSignIn);
+        Button btnSignIn = (Button) findViewById(R.id.login_btnSignIn);
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //instancia de la caja de texto
-                EditText etxUsername = (EditText)findViewById(R.id.login_etxUsername);
-                EditText etxPassword = (EditText)findViewById(R.id.login_etxPassword);
+                EditText etxUsername = (EditText) findViewById(R.id.login_etxUsername);
+                EditText etxPassword = (EditText) findViewById(R.id.login_etxPassword);
                 String username = etxUsername.getText().toString();
                 String password = etxPassword.getText().toString();
 
                 // Maneja la excepcion en caso de que el usuario no exista en la base de datos
-                try{
+                try {
                     User retrievedUser = db.getUser(username);
 
-                    // COnfirma que la contrasena sea igual a la registrada
-                    if(password.equals(retrievedUser.getPassword())){
+                    // Confirma que la contrasena sea igual a la registrada
+                    if (password.equals(retrievedUser.getPassword())) {
 
                         // Gurda la sesion en SharedPreferences
                         SharedPreferences sessionPreferences = getApplicationContext().getSharedPreferences("SessionPreferences", 0); // 0 - for private mode
@@ -102,11 +103,13 @@ public class LoginActivity extends AppCompatActivity {
                         //Abre la siguiente ventana
                         Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(myIntent);
+
+                        // Se finaliza la actividad
                         finish();
                     }
 
                     //Si las contrasenas no concuerdan, muestra una alerta con el error
-                    else{
+                    else {
                         builder.setMessage(R.string.error_invalid_sign_in)
                                 .setTitle(R.string.error_sign_in);
                         AlertDialog dialog = builder.create();
@@ -115,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 // Si no existe el usuario, muestra un dialogo
-                catch(Exception e){
+                catch (Exception e) {
                     builder.setMessage(R.string.error_invalid_sign_in)
                             .setTitle(R.string.error_username);
                     AlertDialog dialog = builder.create();
@@ -125,7 +128,4 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
-
-
 }
-
